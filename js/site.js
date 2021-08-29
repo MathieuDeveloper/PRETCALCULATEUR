@@ -20,7 +20,7 @@ function calculus(loanAmount, numberPayments,rate) {
     let monthlyRate = 0;
     let totalCost = 0;
     let totalInterestEnd = 0;
-    let eachMonth = {month:[], payment=0, principal:[], interest:[], totalInterest:[], balance:[], totalInterestEnd=0};
+    let eachMonth = {month:[0], payment=0, principal:[0], interest:[0], totalInterest:[0], balance:[loanAmount], totalInterestEnd=0};
 
     totalMonthlyPayment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
     //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
@@ -39,9 +39,15 @@ function calculus(loanAmount, numberPayments,rate) {
 
     }
     // formules a verifier:
-    /* first Term:  interestPayment1==loanAmount-monthlyRate
+    //balance 0 =loanAmount
+    /* first Term:  interestPayment1==balance0*monthlyRate
                     principal1==totalMonthlyPayment-interestPayment1
-                    balance1==loanAmount-principal1
+                    balance1==balance0-principal1
+
+                    eachMonth.interest[i]==eachMonth.balance[i-1]*monthlyRate
+                    principali==totalMonthlyPayment-interestPayment1
+                    balancei==balance0-principal1
+
 
     second Term:    interestPayment2==balance1*monthlyRate
                     interestPayment2==(loanAmount-principal1)*monthlyRate
