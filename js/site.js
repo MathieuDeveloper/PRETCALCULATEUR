@@ -18,6 +18,7 @@ function calculus(loanAmount, numberPayments,rate) {
     let interestPayment = 0;
     let principalPayment = 0;
     let monthlyRate = 0;
+    LET eachMonth = {};
 
     totalMonthlyPayment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
     //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
@@ -27,7 +28,7 @@ function calculus(loanAmount, numberPayments,rate) {
     totalInterestEnd = (totalMonthlyPayment * numberPayments) - loanAmount;
     /* first Term:  interestPayment=loanAmount*monthlyRate
                     totalmonthlyPayment-interestPayment
-faire un objet du mois qui contient tous les chiffres du mois
+faire un objet  qui contient tous les Array.
 
 */
     
