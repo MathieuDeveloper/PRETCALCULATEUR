@@ -7,37 +7,42 @@ function getValue() {
     // should check if they are numbers
     
     
-    calculus(loanAmount, numberPayments, rate);
+    let eachMonth=calculus(loanAmount, numberPayments, rate);
 
 
 }
 // use toFixed() to round and convert to string ! 
 function calculus(loanAmount, numberPayments,rate) {
-    let payment = 0;
-    let balance = 0;
-    let interest = 0;
-    let principal = 0;
-    //let monthlyRate = 0;
+    let monthlyPayment = 0;
     let totalCost = 0;
     let totalInterest = 0;
-    let eachMonth = {month:[0], payment=0, principal:[0], interest:[0], totalInterest:[0], balance:[loanAmount], totalInterest=0};
-//payment est la mensualité
-    payment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
+    let eachMonth = {month:[0],payment:0,principal:[0],interest:[0],totalInterestObj:0,
+        balance:[loanAmount],totalInterestEnd:0,totalCost:0};
+         let obj = {un:1,deux:2};
+    //payment est la mensualité
+    monthlyPayment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
     //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
-    eachMonth.payment = payment;
+    eachMonth.payment = monthlyPayment;
     
     
-    // taux periodique =(1+taux annuel)^(1/periode par an donc 12) -1
-    //monthlyRate = ((1 + rate/100) ^ (1 / 12)) - 1;  // 0.00407412378
-    // montant interets = (montant mensualite*nb mensualite)-capital emprunté
-    totalInterest = (payment * numberPayments) - loanAmount;
-    eachMonth.totalInterest = totalInterest;
-    totalCost = loanAmount + totalInterestEnd;
-    for (let i = 1; i <= numberPayment; i++) {
+   
+    totalInterest = (monthlyPayment * numberPayments) - loanAmount;
+    eachMonth.totalInterestEnd = totalInterest;
+    totalCost = loanAmount + totalInterest;
+    eachMonth.totalCost = totalCost;
+    
+    for (let i = 1; i <= numberPayments; i++) {
+        eachMonth.month.push(i);
         
+        eachMonth.interest.push(eachMonth.balance[i-1]*rate/1200);
         
-
+        eachMonth.principal.push(monthlyPayment-eachMonth.interest[i]);
+        eachMonth.balance.push(eachMonth.balance[i-1]-eachMonth.principal[i]);
+        
     }
+    alert(eachMonth.interest);
+return eachMonth;
+    
     // formules a verifier:
     //balance 0 =loanAmount
     /* first Term:  interest1==balance0*5/1200
@@ -46,16 +51,13 @@ function calculus(loanAmount, numberPayments,rate) {
 
                     eachMonth.interest[i]==eachMonth.balance[i-1]*5/1200
                     principali==payment-interesti
-                    balancei==balance[i-1]]-principali
+                    balancei==balance[i-1]]-principali */
 
 
    
 
 
 
-*/
-    eachMonth.month.push(69);
-    alert(eachMonth.month);
     
 }
 
