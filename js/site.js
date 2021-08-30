@@ -61,18 +61,18 @@ function displayValue(eachMonth) {
     tableBody.innerHTML = "";
     let templateRow = document.getElementById("loanTemplate");
 
-    for (let index = 1; index <= eachMonth.term; index += 5) {
+    for (let index = 1; index <= eachMonth.term; index += 1) {
         
 
-        let tableRow = document.importNode(templateRow.contentEditable, true);
+        let tableRow = document.importNode(templateRow.content, true);
         let rowCols = tableRow.querySelectorAll("td");
 
-        rowCols[0].textContent = eachMonth.month[i];
-        rowCols[1].textContent = eachMonth.payment;
-        rowCols[2].textContent = eachMonth.principal[i];
-        rowCols[3].textContent = eachMonth.interest[i];
-        rowCols[4].textContent = eachMonth.totalInterestObj[i];
-        rowCols[5].textContent = eachMonth.balance[i];
+        rowCols[0].textContent = eachMonth.month[index];
+        rowCols[1].textContent = eachMonth.payment.toFixed(2);
+        rowCols[2].textContent = eachMonth.principal[index].toFixed(2);
+        rowCols[3].textContent = eachMonth.interest[index].toFixed(2);
+        rowCols[4].textContent = eachMonth.totalInterestObj[index].toFixed(2);
+        rowCols[5].textContent = eachMonth.balance[index].toFixed(2);
 
         tableBody.appendChild(tableRow);
 
