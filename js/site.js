@@ -17,10 +17,11 @@ function calculus(loanAmount, numberPayments, rate) {
         payment: 0,
         principal: [0],
         interest: [0],
-        totalInterestObj: 0,
+        totalInterestObj:[0],
         balance: [loanAmount],
         totalInterestEnd: 0,
-        totalCost: 0
+        totalCost: 0,
+        term: 0
     };
     let obj = {
         un: 1,
@@ -34,11 +35,13 @@ function calculus(loanAmount, numberPayments, rate) {
     eachMonth.totalInterestEnd = totalInterest;
     totalCost = loanAmount + totalInterest;
     eachMonth.totalCost = totalCost;
+    eachMonth.term = numberPayments;
 
     for (let i = 1; i <= numberPayments; i++) {
         eachMonth.month.push(i);
         eachMonth.interest.push(eachMonth.balance[i - 1] * rate / 1200);
         eachMonth.principal.push(monthlyPayment - eachMonth.interest[i]);
+        eachMonth.totalInterestObj.push(eachMonth.interest[i - 1] + eachMonth.interest[i]);
         eachMonth.balance.push(eachMonth.balance[i - 1] - eachMonth.principal[i]);
     }
     return eachMonth;
@@ -53,6 +56,29 @@ function calculus(loanAmount, numberPayments, rate) {
                     balancei==balance[i-1]]-principali */
 }
 
-function displayValue() {
+function displayValue(eachMonth) {
+    let tableBody = document.getElementById("results");
+    tableBody.innerHTML = "";
+    let templateRow = document.getElementById("loanTemplate");
+
+    for (let index = 1; index <= eachMonth.term; index += 5) {
+        
+
+        let tableRow = document.importNode(templateRow.contentEditable, true);
+        let rowCols = tableRow.querySelectorAll("td");
+
+        rowCols[0].textContent = eachMonth.month[i];
+        rowCols[1].textContent = eachMonth.payment;
+        rowCols[2].textContent = eachMonth.principal[i];
+        rowCols[3].textContent = eachMonth.interest[i];
+        rowCols[4].textContent = eachMonth.totalInterestObj[i];
+        rowCols[5].textContent = eachMonth.balance[i];
+
+        tableBody.appendChild(tableRow);
+
+
+
+    }
+
 
 }
