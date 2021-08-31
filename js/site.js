@@ -1,11 +1,16 @@
 function getValue() {
-    let loanAmount = document.getElementById("loanAmount").value;
-    let numberPayments = document.getElementById("numberPayments").value;
-    let rate = document.getElementById("rate").value;
-    // should check if they are numbers
-    let eachMonth = calculus(loanAmount, numberPayments, rate);
-    displayValue(eachMonth);
+    let loanAmount = parseFloat(document.getElementById("loanAmount").value);
+    let numberPayments = parseFloat(document.getElementById("numberPayments").value);
+    let rate = parseFloat(document.getElementById("rate").value);
 
+    // should check if they are numbers
+    if (Number.isNaN(loanAmount) == false && Number.isNaN(numberPayments) == false &&
+        Number.isNaN(rate) == false) {
+        let eachMonth = calculus(loanAmount, numberPayments, rate);
+        displayValue(eachMonth);
+    } else {
+        alert("Vous devez entrer des nombres !");
+    }
 }
 // use toFixed() to round and convert to string ! 
 function calculus(loanAmount, numberPayments, rate) {
@@ -17,11 +22,12 @@ function calculus(loanAmount, numberPayments, rate) {
         payment: 0,
         principal: [0],
         interest: [0],
-        totalInterestObj:[0],
+        totalInterestObj: [0],
         balance: [loanAmount],
         totalInterestEnd: 0,
         totalCost: 0,
-        term: 0
+        term: 0,
+        loanAmount: 0,
     };
     let obj = {
         un: 1,
@@ -31,9 +37,10 @@ function calculus(loanAmount, numberPayments, rate) {
     monthlyPayment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
     //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
     eachMonth.payment = monthlyPayment;
+    eachMonth.loanAmount = loanAmount;
     totalInterest = (monthlyPayment * numberPayments) - loanAmount;
-    eachMonth.totalInterestEnd = totalInterest;
-    totalCost = loanAmount + totalInterest;
+    eachMonth.totalInterestEnd = parseFloat(totalInterest);
+    totalCost = parseFloat(loanAmount) + parseFloat(totalInterest);
     eachMonth.totalCost = totalCost;
     eachMonth.term = numberPayments;
 
@@ -61,8 +68,15 @@ function displayValue(eachMonth) {
     tableBody.innerHTML = "";
     let templateRow = document.getElementById("loanTemplate");
 
+    document.getElementById("payment").innerHTML = `$${eachMonth.payment.toFixed(2)}`;
+
+    document.getElementById("totalPrincipal").innerHTML = `$${eachMonth.loanAmount.toFixed(2)}`;
+    document.getElementById("totalInterest").innerHTML = `$${parseFloat(eachMonth.totalInterestEnd).toFixed(2)}`;
+
+    document.getElementById("totalCost").innerHTML = `$${parseFloat(eachMonth.totalCost).toFixed(2)}`;
+
     for (let index = 1; index <= eachMonth.term; index += 1) {
-        
+
 
         let tableRow = document.importNode(templateRow.content, true);
         let rowCols = tableRow.querySelectorAll("td");
