@@ -38,7 +38,7 @@ function calculus(loanAmount, numberPayments, rate) {
     //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
     eachMonth.payment = monthlyPayment;
     eachMonth.loanAmount = loanAmount;
-    totalInterest = (monthlyPayment * numberPayments) - loanAmount;
+    totalInterest = parseFloat((monthlyPayment * numberPayments) - loanAmount);
     eachMonth.totalInterestEnd = parseFloat(totalInterest);
     totalCost = parseFloat(loanAmount) + parseFloat(totalInterest);
     eachMonth.totalCost = totalCost;
@@ -70,7 +70,7 @@ function displayValue(eachMonth) {
 
     document.getElementById("payment").innerHTML = `$${eachMonth.payment.toFixed(2)}`;
 
-    document.getElementById("totalPrincipal").innerHTML = `$${eachMonth.loanAmount.toFixed(2)}`;
+    document.getElementById("totalPrincipal").innerHTML = `$${parseFloat(eachMonth.loanAmount).toFixed(2)}`;
     document.getElementById("totalInterest").innerHTML = `$${parseFloat(eachMonth.totalInterestEnd).toFixed(2)}`;
 
     document.getElementById("totalCost").innerHTML = `$${parseFloat(eachMonth.totalCost).toFixed(2)}`;
