@@ -3,7 +3,7 @@ function getValue() {
     let numberPayments = parseFloat(document.getElementById("numberPayments").value);
     let rate = parseFloat(document.getElementById("rate").value);
 
-    // should check if they are numbers
+    //  check if they are numbers
     if (Number.isNaN(loanAmount) == false && Number.isNaN(numberPayments) == false &&
         Number.isNaN(rate) == false) {
         let eachMonth = calculus(loanAmount, numberPayments, rate);
@@ -29,10 +29,7 @@ function calculus(loanAmount, numberPayments, rate) {
         term: 0,
         loanAmount: 0,
     };
-    let obj = {
-        un: 1,
-        deux: 2
-    };
+    
     //payment est la mensualité
     monthlyPayment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
     //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
