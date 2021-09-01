@@ -66,8 +66,8 @@
                             let rate = parseFloat(document.getElementById("rate").value);
                         
                             // check if they are numbers
-                            if (Number.isNaN(loanAmount) == false && Number.isNaN(numberPayments) == false &&
-                                Number.isNaN(rate) == false) {
+                            if (Number.isNaN(loanAmount) == false && Number.isNaN(numberPayments) ==
+                             false && Number.isNaN(rate) == false) {
                                 let eachMonth = calculus(loanAmount, numberPayments, rate);
                                 displayValue(eachMonth);
                             } else {
@@ -105,7 +105,8 @@
                                 eachMonth.month.push(i);
                                 eachMonth.interest.push(eachMonth.balance[i - 1] * rate / 1200);
                                 eachMonth.principal.push(monthlyPayment - eachMonth.interest[i]);
-                                eachMonth.totalInterestObj.push(eachMonth.interest[i - 1] + eachMonth.interest[i]);
+                                eachMonth.totalInterestObj.push(eachMonth.interest[i - 1] +
+                                 eachMonth.interest[i]);
                                 eachMonth.balance.push(eachMonth.balance[i - 1] - eachMonth.principal[i]);
                             }
                             return eachMonth;
@@ -116,12 +117,17 @@
                             tableBody.innerHTML = "";
                             let templateRow = document.getElementById("loanTemplate");
                         
-                            document.getElementById("payment").innerHTML = `$${eachMonth.payment.toFixed(2)}`;
+                            document.getElementById("payment").innerHTML =
+                             `$${eachMonth.payment.toFixed(2)}`;
                         
-                            document.getElementById("totalPrincipal").innerHTML = `$${parseFloat(eachMonth.loanAmount).toFixed(2)}`;
-                            document.getElementById("totalInterest").innerHTML = `$${parseFloat(eachMonth.totalInterestEnd).toFixed(2)}`;
+                            document.getElementById("totalPrincipal").innerHTML =
+                             `$${parseFloat(eachMonth.loanAmount).toFixed(2)}`;
+
+                            document.getElementById("totalInterest").innerHTML =
+                             `$${parseFloat(eachMonth.totalInterestEnd).toFixed(2)}`;
                         
-                            document.getElementById("totalCost").innerHTML = `$${parseFloat(eachMonth.totalCost).toFixed(2)}`;
+                            document.getElementById("totalCost").innerHTML =
+                             `$${parseFloat(eachMonth.totalCost).toFixed(2)}`;
                         
                             for (let index = 1; index <= eachMonth.term; index += 1) {
                         
