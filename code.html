@@ -93,7 +93,6 @@
                             };
                            
                             monthlyPayment = (loanAmount) * (rate / 1200) / (1 - (1 + rate / 1200) ** (-60));
-                            //25000 × (5 ÷ 1200) ÷ (1 - (1 + 5 ÷ 1200))^(-60)=471.7808411
                             eachMonth.payment = monthlyPayment;
                             eachMonth.loanAmount = loanAmount;
                             totalInterest = parseFloat((monthlyPayment * numberPayments) - loanAmount);
